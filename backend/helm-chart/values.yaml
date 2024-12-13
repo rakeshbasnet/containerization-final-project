@@ -7,7 +7,7 @@ backend:
     app: db
     env: dev
   image:
-    repository: rakeshbanet/flask-app-backend
+    repository: rakeshbasnet/flask-app-backend
     tag: latest
     pullPolicy: Always
   replicas: 1
