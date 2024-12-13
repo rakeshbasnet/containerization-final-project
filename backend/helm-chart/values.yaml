@@ -18,3 +18,4 @@ backend:
     MONGODB_PASSWORD: SDR0TUd4VlFkcmFIc2xoag==
   containerPorts:
       backend_port: 8082
+  serviceType: NodePort
