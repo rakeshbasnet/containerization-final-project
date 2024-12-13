@@ -13,7 +13,7 @@ RUN npm install
 # Copy the rest of the project files
 COPY . .
 
-ENV REACT_APP_BASE_URL="http://localhost:32337"
+ENV REACT_APP_BASE_URL="http://localhost:30161"
 
 
 # Build the React app

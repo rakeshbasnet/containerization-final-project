@@ -24,7 +24,7 @@ frontend:
       memory: "256Mi"
   configmap:
     ## KEY: "value"
-    REACT_APP_BASE_URL: "http://localhost:32043"
+    REACT_APP_BASE_URL: "http://localhost:30161"
 
   containerPorts:
       http: 80
