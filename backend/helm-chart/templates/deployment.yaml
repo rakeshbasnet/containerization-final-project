@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.backend.name }}
+  namespace: {{ .Values.backend.namespace }}
+  labels:
+{{- toYaml .Values.backend.labels | nindent 4 }}  # Indent the labels properly here
+spec:
+  selector:
+    matchLabels:
+      id: {{.Values.backend.labels.id }}  # Indent matchLabels correctly
+  replicas: {{ .Values.backend.replicas }}
+  template:
+    metadata:
+      labels:
+{{- toYaml .Values.backend.labels | nindent 8 }}  # Ensure correct indentation here as well
+    spec:
+      containers:
+        - name: {{ .Values.backend.name }}
+          image: {{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.backend.name }}-configmap
+                optional: false
+            - secretRef:
+                name: {{ .Values.backend.name }}-secret
+                optional: false
+          ports:
+            - containerPort: {{ .Values.backend.containerPorts.backend_port }}

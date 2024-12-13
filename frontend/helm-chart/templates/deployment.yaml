@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.frontend.name }}
+  namespace: {{ .Values.frontend.namespace }}
+  labels:
+{{- toYaml .Values.frontend.labels | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      id: {{.Values.frontend.labels.id }}
+  replicas: {{ .Values.frontend.replicas }}
+  template:
+    metadata:
+      labels:
+{{- toYaml .Values.frontend.labels | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Values.frontend.name }}
+        image: {{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}
+        imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.frontend.name }}-configmap
+              optional: false
+        ports:
+        - containerPort: {{ .Values.frontend.containerPorts.http }}

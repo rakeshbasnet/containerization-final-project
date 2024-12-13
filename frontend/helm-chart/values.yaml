@@ -1,0 +1,30 @@
+
+frontend:
+  name: frontend-app
+  servicename: frontend-service
+  namespace: frontend
+  labels:
+    id: groupb
+    app: frontend-app
+    env: dev
+  image:
+    repository: rakeshbasnet/flask-app-frontend
+    tag: latest
+    pullPolicy: Always
+  replicas: 1
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 1
+  resources:
+    requests:
+      cpu: "150m"
+      memory: "128Mi"
+    limits:
+      cpu: "250m"
+      memory: "256Mi"
+  configmap:
+    ## KEY: "value"
+    REACT_APP_BASE_URL: "http://localhost:32043"
+
+  containerPorts:
+      http: 80

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  namespace: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: rakeshbasnet/flask-app-frontend:latest
+        ports:
+        - containerPort: 80
+        env:
+          - name: REACT_APP_BASE_URL
+            value: backend-service.backend.svc.cluster.local #Replace it with production backend ip before deployment

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-proxy-app
+  namespace: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      id: "c0916493"
+  template:
+    metadata:
+      labels:
+        id: "c0916493"
+        app: nginx-proxy-app
+        env: dev
+    spec:
+      containers:
+      - name: nginx-proxy-app
+        image: rakeshbasnet/nginx-proxy
+        ports:
+          - containerPort: 80

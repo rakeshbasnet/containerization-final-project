@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.nginx_proxy.name }}
+  namespace: {{ .Values.nginx_proxy.namespace }}
+  labels:
+{{- toYaml .Values.nginx_proxy.labels | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      id: {{.Values.nginx_proxy.labels.id }}
+  replicas: {{ .Values.nginx_proxy.replicas }}
+  template:
+    metadata:
+      labels:
+{{- toYaml .Values.nginx_proxy.labels | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Values.nginx_proxy.name }}
+        image: {{ .Values.nginx_proxy.image.repository }}:{{ .Values.nginx_proxy.image.tag }}
+        imagePullPolicy: {{ .Values.nginx_proxy.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.nginx_proxy.containerPorts.http }}

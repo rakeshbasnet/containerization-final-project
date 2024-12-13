@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.backend.name }}
+  namespace: {{ .Values.backend.namespace }}
+  labels:
+{{- toYaml .Values.backend.labels | nindent 4 }}
+spec:
+  ports:
+  - port: 80            # the port on which the service is listening
+    protocol: TCP
+    targetPort: {{ .Values.backend.containerPorts.backend_port }}      # the port exposed by Pod (we defined in the deployment as part of `containerPort)
+  selector:
+    id: {{.Values.backend.labels.id }}       # Pod label that service is using to select Pods

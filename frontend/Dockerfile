@@ -1,0 +1,32 @@
+# Stage 1: Build the React app
+FROM node:20.18 AS build
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json to install dependencies
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the project files
+COPY . .
+
+ENV REACT_APP_BASE_URL="http://localhost:32337"
+
+
+# Build the React app
+RUN npm run build
+
+# Stage 2: Serve the app using Nginx
+FROM nginx:alpine
+
+# Copy the build folder from Stage 1 to the Nginx HTML folder
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Expose port 80 to the host
+EXPOSE 80
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]

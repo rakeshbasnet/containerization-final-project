@@ -1,0 +1,14 @@
+nginx_proxy:
+  name: wp-proxy
+  namespace: nginx
+  labels:
+    id: groupb
+    app: nginx
+    env: dev
+  image:
+    repository: rakeshbasnet/nginx-proxy
+    tag: latest
+    pullPolicy: Always
+  replicas: 1
+  containerPorts:
+      http: 80

@@ -1,0 +1,12 @@
+Flask==3.0.3
+Flask-Cors==5.0.0
+Jinja2==3.1.4
+itsdangerous==2.2.0
+Werkzeug==3.0.4
+MarkupSafe==2.1.5
+pytest==8.3.3
+pymongo==4.10.1  # MongoDB client (only keep if you're using MongoDB)
+requests==2.32.3  # Only if you make HTTP requests in your app
+Flask-Cors==5.0.0
+python-dotenv==1.0.1
+

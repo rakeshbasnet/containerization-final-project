@@ -1,0 +1,20 @@
+backend:
+  name: backend-app
+  servicename: backend-service
+  namespace: backend
+  labels:
+    id: groupb
+    app: db
+    env: dev
+  image:
+    repository: rakeshbanet/flask-app-backend
+    tag: latest
+    pullPolicy: Always
+  replicas: 1
+  configmap:
+    ## KEY: "value"
+    MONGODB_USERNAME: rakeshbasnet086
+  secrets:
+    MONGODB_PASSWORD: SDR0TUd4VlFkcmFIc2xoag==
+  containerPorts:
+      backend_port: 8082
